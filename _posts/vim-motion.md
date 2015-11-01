@@ -117,6 +117,7 @@ hilight bracket:
 	:hi MatchParen cterm=reverse ctermbg=6 guibg=DarkCyan
 
 ## section motion
+> http://learnvimscriptthehardway.stevelosh.com/chapters/50.html
 
 	(	)		前/后一句首
 	{	}		前/后一段首
@@ -133,25 +134,30 @@ A section start at the nroff macros ".SH", ".NH", ".H", ".HU", ".nh" and ".sh".
 			1. backward/forward secion	(A)
 			2. backward/forward to "}" (B)
 
-Nroff file example:<div> </div>
+custom section:
 
-	Test           A B
-	Test
+	noremap <script> <buffer> <silent> ]] :call <SID>NextSection(1, 0)<cr>
+	noremap <script> <buffer> <silent> [[ :call <SID>NextSection(1, 1)<cr>
+	noremap <script> <buffer> <silent> ][ :call <SID>NextSection(2, 0)<cr>
+	noremap <script> <buffer> <silent> [] :call <SID>NextSection(2, 1)<cr>
 
-	.SH Hello      A B
+	function! s:NextSection(type, backwards)
+		if a:type == 1
+			let pattern = '\v(\n\n^\S|%^)' 
+			let flags = 'e'
+		elseif a:type == 2
+			let pattern = '\v^\S.*\=.*:$'
+			let flags = ''
+		endif
 
-	Test
+		if a:backwards
+			let dir = '?'
+		else
+			let dir = '/'
+		endif
 
-	{              A
-	Test
-	}                B
-
-	Test
-
-	.H World       A B
-
-	Test
-	Test           A B
+		execute 'silent normal! ' . dir . pattern . dir . flags . "\r"
+	endfunction
 
 ## method motion
 

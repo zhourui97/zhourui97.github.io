@@ -14,6 +14,8 @@ description:
 Character classes
 
 	\s	whitespace character: <Space> and <Tab>
+	\_s a whitespace (space or tab) or newline character
+		
 	\S	non-whitespace character; opposite of \s
 	\d	digit:				[0-9]
 	\D	non-digit:			[^0-9]
@@ -40,8 +42,39 @@ Character classes
 	\L	non-lowercase character:	[^a-z]
 	\u	uppercase character:		[A-Z]
 	\U	non-uppercase character		[^A-Z]
+
+	\_. any character including a newline
 	\_x	where x is any of the characters above: character
 			class with end-of-line included
+
+## atom
+
+wrong:
+
+	[$\w_]+
+
+right:
+
+	[$[:alnum:]_]+
+
+	*[:alnum:]*		  [:alnum:]     letters and digits
+	*[:alpha:]*		  [:alpha:]     letters
+	*[:blank:]*		  [:blank:]     space and tab characters
+	*[:cntrl:]*		  [:cntrl:]     control characters
+	*[:digit:]*		  [:digit:]     decimal digits
+	*[:graph:]*		  [:graph:]     printable characters excluding space
+	*[:lower:]*		  [:lower:]     lowercase letters (all letters when
+						'ignorecase' is used)
+	*[:print:]*		  [:print:]     printable characters including space
+	*[:punct:]*		  [:punct:]     punctuation characters
+	*[:space:]*		  [:space:]     whitespace characters
+	*[:upper:]*		  [:upper:]     uppercase letters (all letters when
+						'ignorecase' is used)
+	*[:xdigit:]*		  [:xdigit:]    hexadecimal digits
+	*[:return:]*		  [:return:]	the <CR> character
+	*[:tab:]*		  [:tab:]	the <Tab> character
+	*[:escape:]*		  [:escape:]	the <Esc> character
+	*[:backspace:]*		  [:backspace:]	the <BS> character
 
 end of character classes:
 
@@ -128,6 +161,8 @@ Example:
 	/pat1\|pat2
 	/pat1\&pat2
 
+	/\vpat1&pat2
+
 # compare with perl
 
 	Capability			in Vimspeak	in Perlspeak ~
@@ -186,6 +221,24 @@ Here two example are equal
 1. `*` 搜索光标所处的单词
 2. fx　搜索一个字符 Fx　反向搜索字符（行内）
 tx/Tx　搜索一个字符(相当于Fx/fx，可以用`;`,`,`实现正向反向重复）
+
+## search()
+`:h search()` return lnum
+
+	onoremap <script> <buffer> af :call <SID>CurrentFunction()<cr>
+	vnoremap <script> <buffer> af :call <SID>CurrentFunction()<cr>
+	function! s:CurrentFunction()
+		if search('\v^(\t|    )\w.*function \w+\([^\)]*\)\_s*\{', 'b') > 0
+			"exe 'silent normal' '?\v^(\t|    )\w.*function \w+\([^\)]*\)\_s*\{'."\r"
+			exe 'normal' "\<esc>".'V/\v^(\t|    )\}/'."\r"
+		endif
+	endfunction
+
+### searchpos()
+
+	:let [lnum, col] = searchpos('searhpos')
+
+## search plugin
 
 ### easymotion
 这个插件扩展了fx/tx 的功能, 我觉得map成f 触发比较好

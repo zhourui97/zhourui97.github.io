@@ -61,7 +61,7 @@ Just before the `{rhs}` a special character can appear:
 	:cnoremap
 
 # attr
-map attr list: `<script> <buffer> <buffer>, <silent>, <expr> <script>, <unique> and <special>` 等
+map attr list: `<script> <buffer> <buffer>, <silent>, <expr> , <unique> and <special>` 等
 
 ## script map
 `<script>` 关键字可以被用来使一个映射仅对当前脚本有效。参见 `|:map-<script>|`。

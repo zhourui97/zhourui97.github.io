@@ -106,12 +106,23 @@ return list
 ## getline
 
 	getline({lnum}) "get line of lnum
+	getline('.')
 
 ## indent
 
 	function! IndentLevel(lnum)
 		return indent(a:lnum) / &shiftwidth
 	endfunction
+
+## append
+
+	setlocal buftype=nofile
+    call append(lnum, split('a,b', ','))
+
+:read
+
+	:[lnum]r <file>
+	:[lnum]r !cmd
 
 # Open, save, exit
 

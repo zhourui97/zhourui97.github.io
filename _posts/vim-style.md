@@ -89,10 +89,12 @@ gq受formatoptions的影响,详见`:h fo-table`(formatoptions), eg: `:set fo=tco
 	M：在拼接两行时（重新格式化，或者是手工使用“J”命令），如果前一行的结尾或后一行的开头是多字节字符，则不插入空格，非常适合中文
 
 ## style align
+center, left, right
 
 	Center align: “:ce {width}”
 	Right align: “:ri {width}”
 	Left align: “:le {indent}”
+
 	Format paragraph: “gqip”
 	Format current selection: “gq”
 	“:help formatting” “:help text-objects”

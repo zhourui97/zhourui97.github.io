@@ -195,6 +195,19 @@ Result:
 	:source %
 	:source file
 
+### autoload
+	:call somefile#Hello()
+
+If not loaded, Vim will look for a file called `autoload/somefile.vim` in your `runtimepath` directory (and any Pathogen bundles).
+
+	function somefile#Hello()
+		" ...
+	endfunction
+
+`autoload/myplugin/somefile.vim`:
+
+	:call myplugin#somefile#Hello()
+
 ## 查看脚本
 
 	:scrip	:scriptnames 查看加载的脚本

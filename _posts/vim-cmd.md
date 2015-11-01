@@ -99,6 +99,7 @@ multi args:
 To disalbe command's output.
 
 	:silent echo "abc"
+	:silent !echo "abc"
 	:silent execute "normal! .."
 
 ## normal command
@@ -156,7 +157,7 @@ Syntax:
 		All the other initializations are skipped.
 		vim -u NONE " No init file.
 
-## external command
+## external bang command
 Syntax:
 
 	# 替换式
@@ -177,10 +178,64 @@ eg:
 	!!wc
 	:.!wc
 
-### pipe to external cmd
+### pipe to external bang cmd
 
 	:[range]w[rite] [++opt] !{cmd}
 	:w !sudo tee %
+
+## system
+
+	echo system('ls')
+	echo system('wc -c', stdin)
+	echo system('cat', 'sth.')
+
+# user command
+
+## define command
+
+	:com[mand][!] [{attr}...] {cmd} {rep}
+			Define a user command.  The name of the command is
+			{cmd} and its replacement text is {rep}.  The command's
+			attributes (see below) are {attr}.  
+
+Argument:
+
+	-nargs=0    No arguments are allowed (the default)
+	-nargs=1    Exactly one argument is required, it includes spaces 
+	-nargs=*    Any number of arguments are allowed (0, 1, or many),
+		    separated by white space
+	-nargs=?    0 or 1 arguments are allowed
+	-nargs=+    Arguments must be supplied, but any number are allowed
+
+Specifically, "s:var" will use the script-local variable in the script where the command was
+defined, not where it is invoked!  Example:
+
+    " script1.vim: >
+	:let s:error = "None"
+	:command -nargs=1 Error echoerr <args>
+
+	" script2.vim: >
+	:source script1.vim
+	:let s:error = "Wrong!"
+	:Error s:error
+
+Output: "NONE", Calling a function may be an alternative
+	
+
+## list
+list all user commmand
+
+	:com 
+	:com {cmd}
+	:verbose command {cmd}
+
+## delete
+
+	"clear all
+	:comc :comclear
+
+	"delete command
+	:delc {cmd}
 
 # Reference
 - [learnvim]

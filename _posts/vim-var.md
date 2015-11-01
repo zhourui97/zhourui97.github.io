@@ -220,6 +220,8 @@ items
 
 	:echo ['foo', [3, 'bar']]
 	:let list=['foo', [3, 'bar']]
+	
+	let [a,b] = [1,2]
 
 ## index
 

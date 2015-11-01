@@ -9,32 +9,6 @@ description:
 
 # Window 窗口
 
-## window number
-
-	$ last window
-	# last accessed window(<c-w>p will go)
-
-## get window number
-
-	"current window
-	echo winnr()
-
-	"last window number equal to window count
-	let window_count = winnr('$')
-
-	"last accessed window
-	echo winnr('#')
-
-## 窗口状态
-	
-	:set laststatus指定何时最近使用的窗口会有一个状态-显示当前编辑的filename
-		0 永远没有
-		1 只有分割窗口时
-		2 所有
-	:set showcmd "显示输入的命令
-	:set ruler "显示行列
-	<c-g> 显示当前编辑的文件信息
-
 ## powerline
 这是一个增强状态栏的插件
 
@@ -126,7 +100,7 @@ description:
 ### switch window cmd
 > http://learnvimscriptthehardway.stevelosh.com/chapters/38.html
 
-`ctrl+w` 可以用`:wincmd` 代替
+`ctrl+w` 可以用`:wincmd` 代替, nth window:
 
 	:3wincmd w
 	:3wincmd b
@@ -139,6 +113,32 @@ description:
 	nnoremap <unique> <S-Down> <C-W><Down>
 	nnoremap <unique> <S-Left> <C-W><Left>
 	nnoremap <unique> <S-Right> <C-W><Right>
+
+## window number
+
+	$ last window
+	# last accessed window(<c-w>p will go)
+
+### get window number
+
+	"current window
+	echo winnr()
+
+	"last window number equal to window count
+	let window_count = winnr('$')
+
+	"last accessed window
+	echo winnr('#')
+
+## 窗口状态
+	
+	:set laststatus指定何时最近使用的窗口会有一个状态-显示当前编辑的filename
+		0 永远没有
+		1 只有分割窗口时
+		2 所有
+	:set showcmd "显示输入的命令
+	:set ruler "显示行列
+	<c-g> 显示当前编辑的文件信息
 
 ## move window 移动窗口
 如果你对新分割窗口位置不满意，则可以移动
@@ -164,6 +164,12 @@ description:
 					+	a modified buffer(正修改的缓冲区)
 					x   a buffer with read error
 				
+## bufwinnr
+get window number of buf 1:
+
+	echo bufwinnr(1)
+	echo bufwinnr('vim-windo')
+
 ## switch buffer
 缓冲区跳转常用的命令：
 
@@ -212,6 +218,16 @@ Edit the alternate file. Mostly the alternate file is the previous edited file.
 	:vert sp a.txt  "或者用垂直新窗口
     :vs# 重新打开上次关闭的缓冲区
 
+## buftype
+
+	:set buftype=nofile
+	  <empty>	normal buffer
+	  nofile	buffer which is not related to a file and will not be written
+	  nowrite	buffer which will not be written
+	  acwrite	buffer which will always be written with BufWriteCmd autocommands. 
+	  quickfix	quickfix buffer, contains list of errors |:cwindow|
+	  help		help buffer (you are not supposed to set this manually)
+
 ## get buffer name
 
 	bufname("%")		name of current buffer
@@ -240,6 +256,14 @@ get buffer number:
 *Args*  is a subset of buffer list.
 
 - Args list is files opened at command line or open from the vim command line: `:args`
+
+loop arglist
+
+	:let n = 1
+	:while n <= argc()	    " loop over all files in arglist
+	:  exe "argument " . n
+	:  let n = n + 1
+	:endwhile
 
 关闭一个文件可以通过buffer:
 
