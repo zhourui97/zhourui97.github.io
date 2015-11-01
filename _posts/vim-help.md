@@ -110,3 +110,37 @@ The following mappings (which can go in your vimrc) simplify navigating the resu
 
 	:h macvim-menu
 
+# help-write
+> :help help-writing 
+
+`figlet -f ogre "Potion`命令来得到这些有趣的字符的. Figlet is a shell tool(`brew install figlet`)
+
+help doc example: http://learnvimscriptthehardway.stevelosh.com/chapters/54.html
+
+	*potion.txt* functionality for the potion programming language
+
+						  ___      _   _              ~
+						 / _ \___ | |_(_) ___  _ __   ~
+						/ /_)/ _ \| __| |/ _ \| '_ \  ~
+					   / ___/ (_) | |_| | (_) | | | | ~
+					   \/    \___/ \__|_|\___/|_| |_| ~
+
+			  Functionality for the Potion programming language.
+			Includes syntax highlighting, code folding, and more!
+	====================================================================
+	CONTENTS                                            *PotionContents*
+
+		1. Usage ................ |PotionUsage|
+		2. Mappings ............. |PotionMappings|
+		3. License .............. |PotionLicense|
+		4. Bugs ................. |PotionBugs|
+		5. Contributing ......... |PotionContributing|
+		6. Changelog ............ |PotionChangelog|
+		7. Credits .............. |PotionCredits|
+	====================================================================
+	Section 1: Usage                                       *PotionUsage*
+
+	This plugin with automatically provide syntax highlighting for
+	Potion files (files ending in .pn).
+
+	It also...
