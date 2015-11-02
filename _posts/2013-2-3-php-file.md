@@ -51,34 +51,9 @@ description:
     __FILE__
 	realpath($file); //获取链接文件的绝对路径
 
-#### _SERVER中的path:
-
-	http://localhost/a/b/c/?var1=val1
-
-    #按脚本 ****************
-    SCRIPT_FILENAME = DOCUMENT_ROOT + truePath
-        /data1/www/htdocs/912/hilo/1/phpinfo.php
-    DOCUMENT_ROOT
-        /data1/www/htdocs/912/hilo/1
-
-    #按url
-    path: SCRIPT_NAME /PHP_SELF / DOCUMENT_URI (nginx: SCRIPT_URL 默认是空的)
-		nginx: $fastcgi_script_name , 这可以被 rewrite 改写, 以上path 都会变
-			/a/b/c/
-		REQUEST_URI(query) 则不会变
-		
-    SCRIPT_URI = HTTP_HOST+path 可能为空
-        http://hilojack.com/a/b/c/
-    REQUEST_URI = path + QUERY_STRING
-		nginx: $request_uri
-        /a/b/c/?test=1
 
 Refer to: [](/p/linux-nginx)
 
-其它:
-
-	$_SERVER['OLDPWD']
-		The definition of OLDPWD is the *p*revious *w*orking *d*irectory as set by the cd command
 
 ## Dir Access
 opendir:

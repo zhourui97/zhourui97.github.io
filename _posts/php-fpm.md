@@ -333,6 +333,10 @@ My first guess would be to `disable request_slowlog_timeout`. Since it's not wor
 	zend_extension = /Absolute_path ; 必须是绝对路径
 		Absolute path to dynamically loadable Zend extension (for example APD,xdebug) to load when PHP starts up.
 
+## upload
+
+	max_file_uploads
+
 ## security
 
 	;default .php
