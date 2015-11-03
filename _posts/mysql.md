@@ -984,6 +984,7 @@ Transaction 具备ACID特点：
 `AUTOCOMMIT 1` 表示每个命令都自动提交, 相当于关闭事务. 可以用以下命令查询：
 
 	select @@AUTOCOMMIT
+	select @@autocommit
 
 > 注意`start transaction` 与 `begin` 不会修改`autocommit` 变量. 但是它们的作用是`临时性的禁用了autocommit`.
 
