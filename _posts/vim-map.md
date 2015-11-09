@@ -15,7 +15,7 @@ map 命令语法：
 
 # map command list - map 命令列表
 
-	{cmd} {attr} {lhs} {rhs}
+	{cmd} [{attr}] {lhs} {rhs}
 
 	where
 	{cmd}  is one of ':map', ':map!', ':nmap', ':vmap', ':imap',
@@ -226,7 +226,7 @@ Vim 编辑器允许你定义你自己的命令。你可以像运行其他命令�
 	
 现在当你输入
 
-        :Say Hello World
+	:Say Hello World
 
 Vim 会显示 "Hello World"。然而如果你加上一个双引号,就不行了。例如: `:Say he said "hello"`
 要把特殊字符放到字符串里,必须在它们的前面加上反斜杠,用 "<q-args>" 就可以: 
@@ -251,6 +251,18 @@ Vim 会显示 "Hello World"。然而如果你加上一个双引号,就不行了�
 当一个范围被指定时,关键字 <line1> 和 <line2> 可以用来取得范围的首行和末行的行 号。例如,下面的命令定义一个将指定的范围写入文件 "save_file" 的命令 -
 
 	:command -range=% SaveIt :<line1>,<line2>write! save_file
+
+## 其它example
+
+	rgrep. 'command!' ~/.vim
+
+	command! -nargs=*
+	\	EMCommandLineMap
+	\   call EasyMotion#command_line#cmap([<f-args>])
+	command! -nargs=1
+	\	EMCommandLineUnMap
+	\   call EasyMotion#command_line#cunmap(<f-args>)
+
 
 # map operator
 > :h omap-info

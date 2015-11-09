@@ -31,6 +31,12 @@ http://woodpecker.org.cn/diveintopython3/
 	$ pydoc open
 	$ pydoc file
 
+## in pythoe
+
+	> help(file)
+	var=1
+	> help(var)
+
 # Shell 
 
 	cat a.py | python
@@ -230,6 +236,13 @@ The difference between list and tuple:
 	list[0]	ok
 
 	del tuple[0] error
+
+## zip list
+
+	>>> xl = [1,3,5]
+	>>> yl = [9,12,13]
+	>>> print zip(xl,yl)
+	[(1, 9), (3, 12), (5, 13)]
 
 
 ## join and split
@@ -495,6 +508,17 @@ output:
 
 	-Hello- -Hilojack-
 
+## lambda function
+
+	func = lambda x, y: x + y
+	func = (lambda x, y: x + y)
+	func(1,2)
+
+lambda 不能显式使用return :
+
+	# error
+	func = lambda x, y: return x + y
+
 ## multi args
 
 	def func(*args):
@@ -504,49 +528,16 @@ output:
 
 	func(a=1, b=2) equal func(b=2, a=1)
 
-# Class and Object
-
-	class MyStuff(object):
-
-		def __init__(self):
-			self.tangerine = "And now a thousand years between"
-
-		def apple(self):
-			print "I AM CLASSY APPLES!"
-
-	obj = MyStuff();
-
-## Inheritance
-
-	class Parent(object):
-
-		def altered(self):
-			print "PARENT altered()"
-
-	class Child(Parent):
-
-		def altered(self):
-			print "CHILD, BEFORE PARENT altered()"
-			super(Child, self).altered()
-
-	Child().altered()
-
-super inherits init
-
-	class Child(Parent):
-
-		def __init__(self, stuff):
-			self.stuff = stuff
-			super(Child, self).__init__()
-
 # Condition & Loop 
 
 ## control
 
-	exit; exit(0);
+	exit(0); 
+		like exit(0) in c
 
-	finally: 
-		do sth.
+	sys.exit() 
+		SystemExit 异常，没有捕获这个异常，会直接退出；捕获这个异常可以做一些额外的清理工作。
+
 
 ## try catch
 
@@ -556,6 +547,9 @@ super inherits init
 		print '\nBye!'
 	except ValueError:
 		return None
+	finally: 
+		do sth.
+
 ## if
 
 	x=10;
@@ -616,3 +610,11 @@ import `ex47.game`, would find two file:
 
 	ex47/game.py
 	ex47/__init__.py
+
+## from import
+
+	from sys import argv # import module "sys" and objects: argv
+	script, arg1, arg2 = argv
+
+	import sys;
+	sys.argv

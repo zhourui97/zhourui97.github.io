@@ -11,6 +11,7 @@ description:
 
 ## 报名
 http://yz.chsi.com.cn/yzwb/
+http://115.28.246.72/mem/list_info.jsp?ops=0&ope=0&OID=2-763168&no=11&nodecode=gcgl.tzgg&imageindex=1&bar=%E9%80%9A%E7%9F%A5%E5%85%AC%E5%91%8A
 
 网上报名时间：
 	第一阶段预报名（报名数据有效）：

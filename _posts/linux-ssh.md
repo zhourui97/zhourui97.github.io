@@ -163,6 +163,7 @@ From remote to local
 > authorized_keys 644，.ssh 700
 
 #### 检验
+
 	$ ssh -vT git@github.com-hilolt
 	OpenSSH_6.2p2, OSSLShim 0.9.8r 8 Dec 2011
 	debug1: Reading configuration data /Users/hilojack/.ssh/config

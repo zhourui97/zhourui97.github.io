@@ -267,6 +267,14 @@ global -> caller -> callback(anonymous)
 	new Date().getTime()/1000 | 0
 	+new Date/1000 | 0
 
+short:
+
+	Date.prototype.formatMMDDYYYY = function(){
+		return (this.getMonth() + 1) +
+				"/" +  this.getDate() +
+				"/" +  this.getFullYear();
+	}
+
 ### compare
 
 	d1 > d2

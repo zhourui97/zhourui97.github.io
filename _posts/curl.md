@@ -40,7 +40,8 @@ curl 默认发送post数据是application/x-www.form-urlencoded(不同于在form
 	-j/--junk-session-cookies
 		this option will make it discard all "session cookies".
 
-	curl -c a.cookie -b a.cookie
+	curl -c a.cookie -b a.cookie curl
+	curl -b a.cookie -c a.cookie http://127.0.0.1:8080/a.php
 	
 # proxy
 

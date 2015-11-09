@@ -41,7 +41,7 @@ in php.ini
 # Session & Cookie
 如果一个cookie 的expires 是Session， 那么会话结束时（浏览器关闭），session 就会失效。你可以为其指定expires
 
-## expires session
+## set session_id
 
 	session_start();
 	setcookie(session_name(),session_id(),time()+$lifetime);
@@ -50,6 +50,16 @@ in php.ini
 
 	session_unset();//相当于unset($_SESSION)	Free all session variables
 	session_destroy();//相当于rm session_file, 但不会unset($_SESSION)	Destroys all data registered to a session
+
+通常session 存储用`session.save_path` 设定
+
+	session_save_path()
+	php -i |grep 'session.save_path'
+
+如果`save_path` 为空，通常存储于:
+
+	/var/tmp/sess_*
+	/var/folders/73/*/T/sess_*
 
 ## encode session
 
@@ -71,6 +81,25 @@ in php.ini
 	bool session_regenerate_id ([ bool $delete_old_session = false ] )
 
 > 在COOKIE 中得到`$_COOKIE[session_name]=>session_id`：
+
+## example
+
+	session_start();
+	setcookie($name = session_name(),$id = session_id(),$time = time()+3600);
+	$_SESSION['count'] = isset($_SESSION['count']) ? $_SESSION['count']+1: 1;
+	setcookie('c_count', $_COOKIE['c_count']+1);
+	var_dump([
+		'sess'=>[
+			'sess_name'=>$name, 
+			'sess_id'=>$id,
+			'expire_time'=>$time,
+			'count' => $_SESSION['count'],
+			'sess_path' => session_save_path(),
+		],
+		'cookie'=>$_COOKIE,
+	]);
+	curl -b a.cookie -c a.cookie http://127.0.0.1:8080/a.php
+
 
 # session handler
 Refer to : http://jp2.php.net/manual/zh/function.session-set-save-handler.php

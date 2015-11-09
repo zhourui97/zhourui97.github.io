@@ -31,7 +31,6 @@ proxychains with shadowsocks
 	https://github.com/shadowsocks/shadowsocks/wiki/Using-Shadowsocks-with-Command-Line-Tools
 
 	proxychains4 git push origin master
-	
 
 # iptables 全局代理
 http://blog.csdn.net/decken_h/article/details/45306391
@@ -44,6 +43,8 @@ linux下实现全局  使用 iptables 做 REDIRECT
 # Auth proxy
 You can simply use wget command as follows:
 
+	$ export https_proxy=http://proxy-server.mycorp.com:3128/
+	$ export https_proxy=http://USERNAME:PASSWORD@proxy-server.mycorp.com:3128/
 	$ wget --proxy-user=USERNAME --proxy-password=PASSWORD http://path.to.domain.com/some.html
 
 Lynx command has the following syntax:
@@ -60,6 +61,37 @@ ab command
 	-X proxy:port   Proxyserver and port number to use
 	-P attribute    Add Basic Proxy Authentication, the attributes
                     are a colon separated username and password. "user:pwd"
+
+# shadowsocks with command line
+> https://github.com/shadowsocks/shadowsocks/wiki/Using-Shadowsocks-with-Command-Line-Tools
+
+On Mac OS X:
+
+	brew install proxychains-ng
+
+Make a config file at `~/.proxychains/proxychains.conf` with content:
+
+	strict_chain
+	proxy_dns 
+	remote_dns_subnet 224
+	tcp_read_time_out 15000
+	tcp_connect_time_out 8000
+	localnet 127.0.0.0/255.0.0.0
+	quiet_mode
+
+	[ProxyList]
+	socks5  127.0.0.1 1080
+
+Then run command with proxychains. Examples:
+
+	proxychains4 curl https://www.twitter.com/
+	proxychains4 git push origin master
+
+Or just proxify bash:
+
+	proxychains4 bash
+	curl https://www.twitter.com/
+	git push origin master
 
 # PAC Proxy
 Proxies in network

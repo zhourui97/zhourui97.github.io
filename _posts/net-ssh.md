@@ -5,6 +5,7 @@ category: blog
 description: 
 ---
 # Preface
+本文介绍协议，具体工具请参考[/p/linux-ssh](/p/linux-ssh)
 Secure Shell 是建立在传输层和应用层基础上的安全协议(它属于应用层)，为计算机的Shell 提供安全的传输环境
 
 应用：

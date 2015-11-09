@@ -32,13 +32,61 @@ subquery 是嵌入另一条语句的select 语句
 	//in
 	select * from tb where id in (select id from tb2)
 
+#### from sub sql
+
+	select filed1 from (select 1 filed1,2) alias;
+
+#### where exists
+
 	//exists 判断结果集
 	select * from tb where exists (select * from tb2 where tb2.id=tb.id)
 
 > Traditionally, an EXISTS subquery starts with SELECT *, but it could begin with SELECT 5 or SELECT column1 or anything at all. MySQL ignores the SELECT list in such a subquery, so it makes no difference.
 > 先查tb 的一条记录，然后将这条记录放到内层查询，如果内层查询有结果，则where 返回true 命中此条记录。然后继续下一条tb 中的记录
 
+	select * from t1 where exists(select * from t2 where t2.id=t1.id);
+
+	select * from t1 where exists(select * from t2,t1 where t2.id=t1.id);
+		like: select * from t2 left join t1 on t2.id=t1.id, so it is always true
+
 构建多表的查询叫联结(join)，与join 相比subquery 更简单直观
+
+Example:
+
+	create table `student`(
+		id int auto_increment primary key,
+		name char(20)
+	);
+	create table course(
+		id int auto_increment primary key,
+		cname char(20)
+	);
+	create table sc(
+		id int auto_increment primary key,
+		sid int,
+		cid int
+	);
+
+	insert into student(name) values('Hilo'), ('Jack');
+	insert into course(cname) values('Math'), ('Physic');
+	insert into sc(sid,cid) values(1,1), (1,2);
+	insert into sc(sid,cid) values(2,1);
+
+	# 选修了Math 的学生
+	select * from student  where exists ( 
+		select * from sc,course where sc.cid=course.id and sc.sid=student.id and exists(
+			select * from course where cname='Math' and id=sc.cid
+	))
+	select * from student  where exists (
+		select * from sc,course where sc.cid=course.id and sc.sid=student.id and course.cname = 'Math'
+	);
+
+全量：第一层否定得到没有学的课程，第二层否定得到*没有没有学*的课程的`学生`。而不是已经学的`课程`。
+
+	# 选修了所有课程的学生
+	select * from student  where not exists (select * from course where not exists (select *  from sc where sc.cid=course.id and sc.sid=student.id));
+		//该学生没有选择的课程
+		select * from course where not exists (select *  from sc where sc.cid=course.id and sc.sid=student.id)
 
 ### Cursor 游标
 Cursor 就是一个游标，相当于数组下标，指示当前数据集取到哪里了。
@@ -103,6 +151,7 @@ import
 
 	insert into table1 (select 1,'zz', 'ab','2015-06-20 14:43:44',0,0,0,2);
 	insert into table1 (select * from table2);
+	insert into table1 select * from table2;
 
 insert_id:
 
@@ -124,6 +173,16 @@ Not exists 保证
 插入行后会导致在`一个UNIQUE索引或PRIMARY KEY`中出现重复值，则执行UPDATE
 
 	INSERT INTO table (a,b,c) VALUES (1,2,3)  ON DUPLICATE KEY UPDATE c=c+1; 
+
+ON DUPLICATE KEY 不支持where
+
+	# unsupported
+	INSERT INTO table (a,b,c) VALUES (1,2,3)  ON DUPLICATE KEY UPDATE c=c+1 where c<5;
+
+但可以使用if 代替:
+	
+	IF(condition, exp1, exp2)
+	INSERT INTO table (a,b,c) VALUES (1,2,3)  ON DUPLICATE KEY UPDATE c=IF(c<5, c=c+1, c)
 
 ### replace when DUPLICATE key
 REPLACE 可以将`DELETE和INSERT`合二为一，形成一个原子操作(它也是基本唯一键的)
@@ -157,6 +216,7 @@ REPLACE也可以使用SET语句
 # where
 
 	where name IS NOT NULL;
+	where name IS NULL;  # 不可以用name=NULL
 	where name <=> NULL; # 不可以用name=NULL
 	where name!=''; # not null and not empty string
 
@@ -224,7 +284,7 @@ condion 可以使用and or 等
 	On (cond1 and cond2)
 
 ## Outer Join
-对于如下数据，Inner Join 会漏掉了capital=3 ,如果不想漏掉它， 此时应该考虑`{Left| Right} OUTER Join`
+对于如下数据，Inner Join 会漏掉了capital=3 ,如果不想漏掉它， 此时应该考虑`{Left| Right} [OUTER] Join`(OUTER 是可选的)
 Left Join 的结果集包括所有的Left, Right Join 则包括了所有的Right 结果集
 
 	MariaDB [test]> select * from country;
@@ -276,10 +336,6 @@ UNION 要求select 的colume 数一致！
 	| 1 |
 	| 1 |
 	+---+
-
-# sub sql
-
-	select filed1 from (select 1 filed1,2) alias;
 
 # Group By
 对于聚合函数(clustered function)`count`, `max` 等，要想指定聚合的范围，就需要用`group by` 分组

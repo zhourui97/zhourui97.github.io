@@ -446,5 +446,12 @@ Example：
 
 > 请参考: [strace 使用](http://www.cnblogs.com/ggjucheng/archive/2012/01/08/2316692.html)
 
+## sample and dtruss
+
+### dtruss
+
+	ps aux| grep php ;#find php id
+	sudo dtruss -p <pid>
+
 # heap
 Refer [c-debug-heap](/p/linux-c-debug-heap)

@@ -168,6 +168,7 @@ usage: resolved PATH...
 	svn merge -r 29 url // -r lastMerged:29
 
 # revert
+
 	 svn revert [-R] something //放弃working copy修改
 	
 # lock
@@ -195,6 +196,7 @@ And this is exactly what svn cleanup does: it searches your working copy and run
 # diff|di
 
 ## di working copy
+
 	# base -> working copy
 	svn diff //same as svn di HEAD
 
@@ -211,6 +213,7 @@ And this is exactly what svn cleanup does: it searches your working copy and run
 	svn di PREV:HEAD
 
 ## di url
+
 	#url r:6 ->r:HEAD
 	svn di -r 6 url
 
@@ -218,6 +221,7 @@ And this is exactly what svn cleanup does: it searches your working copy and run
 	svn di -r 6:8 url
 
 ## diff-cmd
+
 	--diff-cmd ARG           : use ARG as diff command
 	--internal-diff          : override diff-cmd specified in config file
 	-x [--extensions] ARG    : Default: '-u'. When Subversion is invoking an

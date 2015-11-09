@@ -420,6 +420,17 @@ Example
 
 	spl_autoload_register([func1,func2]) 用于代替只支持一个func 的 __autoload($class)
 
+常量:
+
+	class a{
+		const KEY='a';
+		funcction get($key = 'KEY'){
+			echo constant('self::' . $key);
+		}
+	}
+	//or
+	echo (new ReflectionClass('a'))->getConstant('KEY')
+
 运行时：
 
 	get_called_class(void); //the "Late Static Binding" class name
@@ -452,9 +463,25 @@ Example
         return debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 3)[2]['function'];
     }
 	
+# Exception
+
+	LogicException (extends Exception)
+		BadFunctionCallException
+			BadMethodCallException
+		DomainException
+		InvalidArgumentException
+		LengthException
+		OutOfRangeException
+
+	RuntimeException (extends Exception)
+		OutOfBoundsException
+		OverflowException
+		RangeException
+		UnderflowException
+		UnexpectedValueException
 
 # Reference
-- [spl 学习]:
+- [spl 学习]
 
 [spl 学习]:
 http://www.ruanyifeng.com/blog/2008/07/php_spl_notes.html

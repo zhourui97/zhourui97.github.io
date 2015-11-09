@@ -168,7 +168,6 @@ Task: Find Out Current Working Directory Of a Process
 
 3. lsof - a command line tool to list open files under Linux / UNIX to report a list of all open files and the processes that opened them.
 4. /proc/$pid/ file system - Under Linux /proc includes a directory for each running process (including kernel processes) at /proc/PID, containing information about that process, notably including the processes name that opened port.
-	
 
 ## 路由表
 
@@ -218,13 +217,18 @@ Find original owning process of a Linux socket
 	sudo lsof /dev/shm/mc.sock
 	sudo lsof -Ua #all socket
 
-## via port
+## via port and protocol
 
 	lsof -i :portNumber
 	lsof -i tcp:portNumber
 	lsof -i udp:portNumber
 	lsof -i :80
 	lsof -i :80 | grep LISTEN
+
+### via protocol
+
+	lsof -n -i4TCP:$PORT | grep LISTEN
+	
 	
 
 # ifconfig

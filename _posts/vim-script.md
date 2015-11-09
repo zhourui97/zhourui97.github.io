@@ -196,6 +196,7 @@ Result:
 	:source file
 
 ### autoload
+
 	:call somefile#Hello()
 
 If not loaded, Vim will look for a file called `autoload/somefile.vim` in your `runtimepath` directory (and any Pathogen bundles).

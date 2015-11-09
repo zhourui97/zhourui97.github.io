@@ -90,6 +90,10 @@ list($k, $v) = each($arr)
 ## Iterator
 Interface for external iterators or objects that can be iterated themselves internally.(current/key/next/rewind/valid)
 
+### array_keys array_values
+array_keys 与 array_values 得到的元素顺序不会变
+http://stackoverflow.com/questions/21092095/is-elements-order-the-same-after-array-being-split-by-array-keys-and-array-val
+
 ### walk
 
 	//用于改变原数组 或者 通过闭包函数返回新的数组或者结果集
@@ -518,15 +522,15 @@ https://code.google.com/p/phpquery/
 	"${arr[hello]}" //notice
 	"{$arr[hello]}" //notice
 
-	"$obj->key";
-	"${obj->key}";
+	"$obj->key";		equal with {$obj->key}
 	"{$obj->key}";
+	"${obj->key}";		return value as variable name
 
 	"{func()}";//literal
 	"${func()}";//exec func(), then use the func's return value as variable name
 
-	"${$obj->func()}"
-	"${$obj->$p}"
+	"${$obj->func()}" 	return value as variable name
+	"${$obj->$p}" 		return value as variable name
 
 > `\`` 反引号(grave accent)的规则同双引号一样
 
@@ -766,9 +770,11 @@ Refer to [php-curl](https://github.com/hilojack/php-lib)
 ## headers
 
 ### getheader
+
 	getallheaders();
 
 ## dns
+
 	checkdnsrr($domain) && print "domain exists!" ;
 	//获取dns信息
 	print_r(dns_get_record('baidu.com'));
@@ -776,17 +782,20 @@ Refer to [php-curl](https://github.com/hilojack/php-lib)
 	getmxrr('baidu.com', $info); print_r($info);
 
 ## service
+
 	//get port
 	echo getservbyname($service = 'http', $protocol = 'tcp');//service 必须是/etc/services中
 	//get service name
 	echo getservbyport($port = 80, 'tcp');
 
 ## socket
+
 	$http = fsockopen('baidu.com', 80[, $errno, $err, $timeout]);
 	fputs($http, $header = "GET /1.1\r\nConnection: Close\r\n\r\n");
 	while(!feof($http)) $res = fgets($http, 1024);
 
 ## mail
+
 	mail($to, $subject, $message[, $header = "From: test@hilojack.com\r\n"]);
 	cat php.ini
 		sendmail_from = string
@@ -794,6 +803,7 @@ Refer to [php-curl](https://github.com/hilojack/php-lib)
 		smtp_port = 25(default)
 
 ## ip
+
 	ip2long('0.0.1.1');//257
 	long2ip
 
@@ -803,23 +813,36 @@ Refer to [php-curl](https://github.com/hilojack/php-lib)
 ## timestamp
 
 ### get
+
 	time(viod);//get current timestamp
 	getlastmod(void);// 返回当前php文件的modifier timestamp
 
 ### mktime
+
 	mktime($hours,$minutes,$secs,$month, $day, $year); //make timestamp
 	strtotime('-2 days');
 	strtotime('Next Monday');
 
+### strtotime
+last week:
+
+	today is 10151106 Friday
+	echo date("Ymd", strtotime("last monday"));
+		20151102
+	echo date("Ymd", strtotime("last week"));
+		20151026
+
 ## locale
+
 	setlocal(LC_ALL, 'zh_CN.utf8');
 
 ## date
+
 	date('Y-m-d')
 	echo date('Y-m-d', strtotime('+2 days'));
 
-
 ## DateTime
+> http://wulijun.github.io/php-the-right-way/#date_and_time
 
 	$date = new DateTime;
 	$date = DateTime::createFromFormat('d.m.Y','13.7.1999');
@@ -861,6 +884,7 @@ Get user php is running as:
 	memory_get_peak_usage($real_usage = false); //内存峰值
 
 # Cpu
+
 	$dat=getrusage();
 	foreach ($dat as $key => $val) {
 		$usertime= $dat['ru_utime.tv_usec'];
