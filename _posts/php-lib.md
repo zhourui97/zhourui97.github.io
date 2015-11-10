@@ -465,6 +465,19 @@ simpleXML
 
 # String
 
+## range string
+
+	function rangeChar($lower, $upper) {
+		++$upper;
+		for ($i = $lower; $i !== $upper; ++$i) {
+			yield $i;
+		}
+	}
+	foreach (rangeChar('hilojack', 'hilojacz') as $v) 
+
+	range('A', 'Z')
+	array_merge(range('A', 'Z'), range('a', 'z'));
+
 ## wildcard
 
 	bool fnmatch('*.weibo.cn', $host, FNM_CASEFOLD);//Caseless match
