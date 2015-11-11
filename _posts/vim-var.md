@@ -34,6 +34,7 @@ It lists the following types:
 ## vim-Variables
 
 	v:lnum
+		Line number for the 'foldexpr' |fold-expr
 
 # var data type
 

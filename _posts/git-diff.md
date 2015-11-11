@@ -6,6 +6,8 @@ description:
 ---
 # Preface
 
+# git diff
+
 	git diff $start_commit $end_commit -- path/to/file
 	git diff $start_commit path/to/file
 	git diff $start_commit
@@ -63,6 +65,8 @@ shows *what operations were done* to the files too
 	git diff branch1 //diff current branch based on branch1 
 	git diff branch1 feature//diff feature based on branch1 
 
+### diff 2 branch
+
 	## diff 2 branch
 	git diff master..branch1 #diff branch1 based on The Parent of master&branch1 基于共同祖先做diff, 即得到branch1的变更.
 	## The following 3 commands is equal in function.
@@ -84,6 +88,29 @@ shows *what operations were done* to the files too
 	<F
 	<E
 	>D
+
+### diff specify file
+To view the differences going from the remote file to the local file:
+
+	git diff remotename/branchname:remote/path/file1.txt local/path/file1.txt
+
+To view the differences in the other direction:
+
+	git diff HEAD:local/path/file1.txt remotename/branchname:remote/path/file1.txt
+
+Basically you can diff any two files anywhere using this notation:
+
+	git diff ref1:path/to/file1 ref2:path/to/file2
+
+Example:
+
+	"Equal
+	git d origin/dev mis/src/model/signcheck.php
+	git d origin/dev:mis/src/model/signcheck.php mis/src/model/signcheck.php
+	git d origin/dev -- mis/src/model/signcheck.php
+
+	"two commit
+	git d origin/dev main/master -- mis/src/model/signcheck.php
 
 ## diff option
 

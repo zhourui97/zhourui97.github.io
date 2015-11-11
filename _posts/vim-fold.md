@@ -104,5 +104,3 @@ This lets you use a custom piece of Vimscript to define where folds occur. It's 
 
 ## indent
 Vim uses your code's indentation to determine folds. Lines at the same indentation level fold together. (It suits Python especially)
-
-

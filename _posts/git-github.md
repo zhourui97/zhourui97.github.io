@@ -25,6 +25,9 @@ description:
 http://doc.gitlab.com/ci/quick_start/README.html
 http://dockone.io/article/468
 
+## jenkins with gitlab
+http://www.jianshu.com/p/c69deb29720d
+
 # Continuous integration(CI)
 
 ## travis
