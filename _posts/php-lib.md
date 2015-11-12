@@ -169,6 +169,14 @@ With no params reference:
 	array_reverse
 	array_flip
 
+array_flip 跟array_merge 一样，后面的key 会覆盖前面的
+
+	var_dump(array_flip(['a'=>'b', 'c'=>'b']));
+	array(1) {
+	  ["b"]=>
+	  string(1) "c"
+	}
+
 ## 合并-拆分
 
 	array_combine($keys, $values)
@@ -187,7 +195,7 @@ With no params reference:
 
 array_remove_key
 
-	array_diff_key($data,array_flip($bad_keys));
+	array_diff_key($data, array_flip($bad_keys));
 
 array_keep_key
 
@@ -342,7 +350,7 @@ flush数据到客户端。调用这个方法后，再有任何输出内容，都
 
 ## Anonymous function recursively
 
-	$f = function() use($bar, $foo, &$f) {
+	$f = function() use($bar, $foo, &$f) { //$f 必须为引用，否则$f 是undefined
 	   $f();
 	};
 

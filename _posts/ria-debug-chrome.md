@@ -11,6 +11,8 @@ chrome://chrome-urls/
 chrome 调试指南1,2,3 
 http://web.jobbole.com/82558/
 
+http://web.jobbole.com/84148/
+
 # Network
 chrome://chrome-urls
 - Dns Cache

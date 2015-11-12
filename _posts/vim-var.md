@@ -91,13 +91,30 @@ operator
 	echo 'Hilojack''s blog'
 		Hilojack's blog
 
+### match
+
+	echo match('abc', 'bc');//1
+
+### stridx(strpos)
+
+	:echo stridx("An Example", "Example")	     3
+	:echo stridx("Starting point", "Start")    0
+	:echo stridx("Starting point", "start")   -1
+
+### index
+> :h List, 
+
+	str[start:end]		"include end"
+	str[:end]			"include end"
+	str[start:]		"include end"
+
 ### string func
 strlen
 
 	:echom len("foo")
 	:echom strlen("foo") 	"identical , equal
 
-split and join
+### split and join
 delimiter is any one of `,`, ` `:
 
 	echo split("one two")

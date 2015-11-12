@@ -474,6 +474,10 @@ git:
 	
 	$(git_prompt_info)%{$fg_bold[blue]%}
 
+vm:
+
+	%n@%m%{$fg[cyan]%} %c %{$fg_bold[blue]%}>%{$reset_color%}
+
 # 参考
 - [readline] 
 - [shell_shortcutKey]

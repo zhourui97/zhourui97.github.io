@@ -22,6 +22,10 @@ description:
 	~/.vim/ftdetect/
 		will be run every time.
 		Only set up autocommand that detect and set the `filetype` type.
+		But required with `/ftdetect/{filetype}.vim` only
+	~/.vim/syntax/
+		will be run every time.
+		But required with `/syntax/{filetype}.vim` only
 	~/.vim/ftplugin/
 		When vim set buffer's type to a value(eg. derp), it then look for a file in `ftplugin` that matches
 		(eg. ftplugin/derp.vim or ftplugin/derp/*.vim).

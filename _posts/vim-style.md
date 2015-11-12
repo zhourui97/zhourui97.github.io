@@ -27,7 +27,8 @@ carriage return:
 # style
 
 	:set tw=80
-	:set cuc "光标对齐
+	:set cuc cursorcolumn "光标对齐
+	:set cul cursorline
 
 ## wrap
 
